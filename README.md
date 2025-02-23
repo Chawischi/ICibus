@@ -22,6 +22,9 @@ O Icibus foi desenvolvido utilizando as seguintes tecnologias:
 [![Next.js](https://img.shields.io/badge/Next.js-000000.svg?style=for-the-badge&logo=Next.js&logoColor=white)](https://nextjs.org/)  
 [![Clerk](https://img.shields.io/badge/Clerk-000000.svg?style=for-the-badge&logo=Clerk&logoColor=white)](https://clerk.dev/)  
 
+## Link do Trello:
+[![Trello](https://img.shields.io/badge/Trello-0052CC.svg?style=for-the-badge&logo=Trello&logoColor=white)](https://trello.com/invite/b/67b7adafc0ed6c3c8e17412e/ATTIe3356c6837adbe094fa329da7c7425bcDC197814/icibus)
+
 ## **👥 Alunos Responsáveis**  
 - **Felipe da Silva Chawischi**  
 - **Gabriel Felipe Alves Bandoch**  
