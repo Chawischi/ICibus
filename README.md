@@ -23,6 +23,8 @@ O Icibus foi desenvolvido utilizando as seguintes tecnologias:
 [![Clerk](https://img.shields.io/badge/Clerk-000000.svg?style=for-the-badge&logo=Clerk&logoColor=white)](https://clerk.dev/)  
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791.svg?style=for-the-badge&logo=PostgreSQL&logoColor=white)](https://www.postgresql.org/)  
 
+Optamos pelo React.js para construir interfaces dinâmicas e responsivas, garantindo uma experiência fluida para o usuário. O Next.js será utilizado tanto no frontend quanto no backend, permitindo renderização otimizada e a criação de APIs diretamente na aplicação. Para o banco de dados, escolhemos o PostgreSQL por sua robustez e escalabilidade. A autenticação será gerenciada pelo Clerk, que simplifica a implementação de login seguro e controle de acesso. Já o TailwindCSS facilitará a estilização, tornando o desenvolvimento mais ágil e organizado, sem a necessidade de escrever CSS manualmente.
+
 ## **📐 Arquitetura do Sistema**  
 O Icibus será desenvolvido utilizando uma **arquitetura monolítica** na primeira versão para facilitar o desenvolvimento e implantação inicial. Futuramente, à medida que a plataforma crescer, poderá ser migrada para uma **arquitetura baseada em microsserviços**, permitindo maior escalabilidade e modularização das funcionalidades.  
 
