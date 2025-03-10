@@ -48,13 +48,13 @@ O Icibus será desenvolvido utilizando uma **arquitetura monolítica** na primei
   
 ## **🔍 Requisitos do Sistema**  
 ### **Para Clientes**  
-- **RF01:** O sistema deve permitir que os clientes visualizem os menus e produtos dos restaurantes cadastrados.
-- **RF02:** O cliente deve poder adicionar e remover itens do carrinho de compras.
+- **RF01:** O sistema deve permitir que os clientes visualizem os menus dos restaurantes cadastrados.
+- **RF02:** O cliente deve poder adicionar e remover itens do pedido.
 - **RF03:** O sistema deve permitir que o cliente simule um pagamento usando informações cadastradas.
 - **RF04:** O cliente deve poder acompanhar o status do pedido em tempo real.
 
 ### **Para Administradores de Restaurantes**  
-- **RF05:** O sistema deve permitir que os administradores cadastrem, editem e removam produtos do menu.
+- **RF05:** O sistema deve permitir que os administradores cadastrem, editem e removam itens do menu.
 - **RF06:** Os administradores devem poder visualizar os pedidos recebidos.
 - **RF07:** O sistema deve permitir que os administradores atualizem o status do pedido (exemplo: "Em preparo", "Saiu para entrega", "Entregue").
 
