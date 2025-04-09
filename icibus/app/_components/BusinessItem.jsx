@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 function Businessitem({ business }) {
   // Verificações de dados antes de acessar as propriedades
@@ -10,7 +11,10 @@ function Businessitem({ business }) {
   const categoryName = business?.categories?.[0]?.name || 'Categoria não disponível';
 
   return (
-    <div className='p-3 hover:border rounded-xl hover:border-primary transition-all duration-200 ease-in-out hover:bg-orange-50'>
+    /*tem q fazer o clique funcionar */
+    <Link 
+    href={'/restaurant/'+business?.slug}
+    className='p-3 hover:border rounded-xl hover:border-primary transition-all duration-200 ease-in-out hover:bg-orange-50'>
       <Image 
         src={bannerUrl} 
         alt={businessName} 
@@ -29,7 +33,7 @@ function Businessitem({ business }) {
         </div>
         <h2 className='text-sm text-primary'>{categoryName}</h2>
       </div>
-    </div>
+    </Link>
   );
 }
 
