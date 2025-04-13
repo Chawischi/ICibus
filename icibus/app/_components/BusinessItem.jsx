@@ -13,7 +13,7 @@ function Businessitem({ business }) {
   return (
     /*tem q fazer o clique funcionar */
     <Link 
-    href={'/restaurant/'+business?.slug}
+    href={'/restaurants/'+business?.slug}
     className='p-3 hover:border rounded-xl hover:border-primary transition-all duration-200 ease-in-out hover:bg-orange-50'>
       <Image 
         src={bannerUrl} 

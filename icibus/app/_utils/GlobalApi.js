@@ -47,7 +47,7 @@ const GetBusiness = async (category)=>{
 const GetBusinessDetail = async(BusinessSlug) =>{
   const query = gql `
   query RestaurantDetail {
-  restaurant(where: {slug: "`+BusinessSlug+`"}) {
+  restaurants(where: {slug: "`+BusinessSlug+`"}) {
     sobreNos
     endereco
     banner {
