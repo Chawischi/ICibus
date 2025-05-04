@@ -1,7 +1,8 @@
 import { gql, request } from 'graphql-request';
 const MASTER_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
 
-/*Server para fazer a requisição da API*/ 
+//Server para fazer a requisição da API
+
 const GetCategory = async () =>{
     const query = gql`
   query Categories {
@@ -19,7 +20,7 @@ const GetCategory = async () =>{
     const result = await request(MASTER_URL,query);
     return result;
 }
-
+/*
 const GetBusiness = async (category)=>{
   const query = gql `
     query GetBusiness {
@@ -43,7 +44,7 @@ const GetBusiness = async (category)=>{
   const result = await request(MASTER_URL,query);
   return result;
 }
-
+*/
 const GetBusinessDetail = async(BusinessSlug) =>{
   const query = gql `
   query RestaurantDetail {

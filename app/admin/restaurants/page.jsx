@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useUser, SignOutButton } from "@clerk/nextjs";
+import { useRouter } from 'next/router';
+
 
 export default function CreateRestaurantPage() {
   const { user } = useUser();
@@ -13,32 +15,39 @@ export default function CreateRestaurantPage() {
   });
   const [error, setError] = useState(""); // Adicionado para mensagens de erro
 
+  // Função para transformar a categoria em slug
+  const formatCategorySlug = (category) => {
+    return category.toLowerCase().replace(/\s+/g, '-'); // Ex: "Lanches" -> "lanches"
+  };
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (!user) {
       setError("Você precisa estar logado para cadastrar um restaurante.");
+      router.push('/login'); // Redireciona para a página de login
       return;
     }
-  
+
     const newRestaurant = {
       ...form,
-      userId: user.id, // Dono do restaurante
+      category: formatCategorySlug(form.category),
+      userId: user.id,
     };
-  
+
     try {
-      const response = await fetch('http://localhost:5000/admin/restaurants', {
+      const response = await fetch('http://localhost:3000/admin/restaurants', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(newRestaurant),
       });
-  
+
       const result = await response.json();
       if (response.ok) {
         console.log("Restaurante cadastrado com sucesso:", result);
@@ -49,7 +58,9 @@ export default function CreateRestaurantPage() {
       setError('Erro na conexão com o servidor.');
     }
   };
-  
+
+
+
 
   return (
     <div className="max-w-7xl mx-auto flex gap-12 p-10">

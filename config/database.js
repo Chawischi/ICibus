@@ -12,4 +12,14 @@ const sequelize = new Sequelize({
   logging: false, 
 });
 
+sequelize.authenticate()
+  .then(() => {
+    console.log('Conexão com o banco de dados foi bem-sucedida!');
+  })
+  .catch((err) => {
+    console.error('Erro ao conectar ao banco de dados:', err);
+    process.exit(1); 
+  });
+
+
 module.exports = sequelize;

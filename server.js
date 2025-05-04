@@ -1,31 +1,44 @@
 const express = require('express');
 const cors = require('cors'); // Importando o CORS
 const app = express();
-const sequelize = require('./config/database'); // Importando a conexão com o banco de dados
+const sequelize = require('./config/database'); 
 const userRoutes = require('./routes/userRoutes');
 const restaurantRoutes = require('./routes/restaurantRoutes');
+const categoryRoutes = require('./routes/categoryRoutes'); 
+const adminRoutes = require('./routes/adminRoutes');
+
+require('dotenv').config();
+
+const PUBLIC = process.env.NEXT_PUBLIC_API;
 
 // Configuração do CORS
 const corsOptions = {
-  origin: 'http://localhost:3000', // Substitua pela URL do seu frontend
+  origin: function (origin, callback) {
+    const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001'];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
 };
 
-// Usando o CORS com as configurações
 app.use(cors(corsOptions)); 
 
 app.use(express.json());
 
-// Roteamento de usuários e restaurantes
 app.use('/users', userRoutes);
 app.use('/restaurants', restaurantRoutes);
+app.use('/category', categoryRoutes); 
+app.use('/admin', adminRoutes);
 
 // Conectar ao banco de dados
-sequelize.authenticate()
+sequelize.sync()
   .then(() => {
-    console.log('Conexão com o banco de dados foi bem-sucedida!');
+    console.log('Tabelas recriadas com sucesso!');
   })
   .catch((err) => {
-    console.error('Erro ao conectar ao banco de dados:', err);
+    console.error('Erro ao sincronizar o banco de dados:', err);
   });
 
 const PORT = process.env.PORT || 3000;

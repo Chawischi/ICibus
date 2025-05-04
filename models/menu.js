@@ -1,21 +1,23 @@
 module.exports = (sequelize, DataTypes) => {
   const Menu = sequelize.define('Menu', {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
     },
-    restaurantId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'Restaurants',
-        key: 'id'
-      }
-    }
+    category: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  }, {
+    tableName: 'menus',
+    timestamps: false,
   });
 
+  // Associações (caso tenha relação com outras tabelas)
   Menu.associate = (models) => {
-    Menu.belongsTo(models.Restaurant, { foreignKey: 'restaurantId' });
-    Menu.hasMany(models.Product, { foreignKey: 'menuId' });
+    // Exemplo de associação (caso Menu pertença a Category)
+    // Menu.belongsTo(models.Category, { foreignKey: 'categoryId' });
   };
 
   return Menu;
