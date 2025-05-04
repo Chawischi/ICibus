@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { useUser, SignOutButton } from "@clerk/nextjs";
 
@@ -10,6 +11,7 @@ export default function CreateRestaurantPage() {
     image: "",
     category: "",
   });
+  const [error, setError] = useState(""); // Adicionado para mensagens de erro
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -17,16 +19,37 @@ export default function CreateRestaurantPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+    if (!user) {
+      setError("Você precisa estar logado para cadastrar um restaurante.");
+      return;
+    }
+  
     const newRestaurant = {
       ...form,
-      userId: user.id, // Dono
+      userId: user.id, // Dono do restaurante
     };
-
-    console.log("Cadastrar restaurante:", newRestaurant);
-
-    // Aqui no futuro: enviar para o Hygraph
+  
+    try {
+      const response = await fetch('http://localhost:5000/admin/restaurants', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newRestaurant),
+      });
+  
+      const result = await response.json();
+      if (response.ok) {
+        console.log("Restaurante cadastrado com sucesso:", result);
+      } else {
+        setError(result.message || 'Erro ao cadastrar restaurante');
+      }
+    } catch (error) {
+      setError('Erro na conexão com o servidor.');
+    }
   };
+  
 
   return (
     <div className="max-w-7xl mx-auto flex gap-12 p-10">
@@ -72,6 +95,9 @@ export default function CreateRestaurantPage() {
       <div className="flex-1 bg-white p-8 rounded-2xl shadow-md">
         <h2 className="text-3xl font-bold mb-6 text-center">Cadastrar Restaurante</h2>
         <form onSubmit={handleSubmit} className="space-y-6 max-w-lg mx-auto">
+          {/* Exibe a mensagem de erro se o usuário não estiver autenticado */}
+          {error && <p className="text-red-500 text-center">{error}</p>}
+
           <div>
             <label className="block font-semibold mb-1">Nome do Restaurante</label>
             <input

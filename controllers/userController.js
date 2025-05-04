@@ -1,25 +1,32 @@
-const { User } = require('../models');
+const { User } = require('../models'); // Ajuste conforme o nome do seu modelo
 
-const getAllUsers = async (req, res) => {
+// Função para criar um novo usuário
+exports.createUser = async (req, res) => {
+  const { clerkId, email } = req.body;
+
+  if (!email || !clerkId) {
+    return res.status(400).json({ message: 'ClerkId e Email são obrigatórios' });
+  }
+
+  try {
+    const newUser = await User.create({
+      clerkId,
+      email,
+    });
+    return res.status(201).json(newUser);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Erro ao criar o usuário' });
+  }
+};
+
+// Função para obter todos os usuários
+exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.findAll();
-    return res.json(users);
+    return res.status(200).json(users);
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    console.error(error);
+    return res.status(500).json({ message: 'Erro ao obter os usuários' });
   }
-};
-
-const createUser = async (req, res) => {
-  try {
-    const { clerkId, email } = req.body;
-    const user = await User.create({ clerkId, email });
-    return res.status(201).json(user);
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-};
-
-module.exports = {
-  getAllUsers,
-  createUser
 };

@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
+const { requireAuth } = require('../middlewares/authMiddleware');
 
-// GET all users
-router.get('/', userController.getAllUsers);
+// Rota para obter todos os usuários
+router.get('/', requireAuth, userController.getAllUsers);
 
-// POST create a user
-router.post('/', userController.createUser);
+// Rota para criar um usuário
+router.post('/', requireAuth, userController.createUser);
 
 module.exports = router;
